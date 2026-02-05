@@ -1,0 +1,21 @@
+services:
+  gateway:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend
+      # - frontend
+
+  # frontend:
+  #   build: ./frontend
+  #   environment:
+  #     - NEXT_PUBLIC_API_URL=http://localhost/api
+
+  backend:
+    iamge: projectyear3/backendyear3:latest
+    # deploy:
+    #   replicas: 3
+    # environment:
