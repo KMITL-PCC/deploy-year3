@@ -15,7 +15,7 @@ services:
   #     - NEXT_PUBLIC_API_URL=http://localhost/api
 
   backend:
-    iamge: projectyear3/backendyear3:latest
+    image: projectyear3/backendyear3:latest
     # deploy:
     #   replicas: 3
     # environment:
