@@ -1,0 +1,22 @@
+name: Deploy to server
+
+on:
+  repository_dispatch:
+    types: [update-frontend, update-backend]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Pull latest images
+        run: docker compose up pull
+
+      - name: Restart containers
+        run: docker compose up -d --remove-orphans 
+
+      - name: Cleanup old images
+        run: docker image prune -f
