@@ -1,0 +1,19 @@
+name: pull main branch
+on:
+  push:
+    branches: [main]
+
+jobs:
+  pull-and-update:
+    runs-on: self-hosted
+
+    steps:
+      - name: Pull latest code
+        run: |
+          cd /home/githubactions/deploy-year3
+
+          git pull origin main
+
+          docker compose up -d --remove-orphans
+
+          docker image prune -f
