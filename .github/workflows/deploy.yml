@@ -12,6 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Copy .env from server
+        run: cp /home/githubactions/deploy-year3/.env .
+
       - name: Pull latest images
         run: docker compose pull
 
