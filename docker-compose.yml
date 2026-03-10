@@ -24,7 +24,7 @@ services:
     networks:
       - projectyear3-network
     expose:
-      - "8000"
+      - "3000"
   #   build: ./frontend
   #   environment:
   #     - NEXT_PUBLIC_API_URL=http://localhost/api
