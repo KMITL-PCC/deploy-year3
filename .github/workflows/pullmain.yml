@@ -14,6 +14,9 @@ jobs:
 
           git pull origin main
 
+          echo "TUNNEL_TOKEN=${{ secrets.TUNNEL_TOKEN }}" > .env
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+
           docker compose up -d --remove-orphans
 
           docker image prune -f

@@ -18,6 +18,11 @@ jobs:
       - name: Pull latest images
         run: docker compose pull
 
+      - name: add env variables
+        run: |
+          echo "TUNNEL_TOKEN=${{ secrets.TUNNEL_TOKEN }}" > .env
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+
       - name: Restart containers
         run: docker compose up -d --remove-orphans 
 

@@ -29,8 +29,6 @@ services:
     image: projectyear3/backendyear3:latest
     # deploy:
     #   replicas: 3
-    env_file:
-      - .env
     networks:
       - projectyear3-network
 
