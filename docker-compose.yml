@@ -15,12 +15,16 @@ services:
       - ./nginx/default.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - backend
-      # - frontend
+      - frontend
     networks:
       - projectyear3-network
-      # - frontend-network
 
-  # frontend:
+  frontend:
+    image: projectyear3/frontendyear3:latest
+    networks:
+      - projectyear3-network
+    expose:
+      - "8000"
   #   build: ./frontend
   #   environment:
   #     - NEXT_PUBLIC_API_URL=http://localhost/api
