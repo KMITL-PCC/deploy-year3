@@ -1,0 +1,7 @@
+# Ignore SSL Certificates and Keys
+*.pem
+*.key
+*.crt
+certs/
+
+.env
