@@ -2,7 +2,7 @@ services:
 
   cloudflared:
     image: cloudflare/cloudflared:latest
-    restart: always
+    restart: unless-stopped
     command: tunnel run
     environment:
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}
@@ -11,6 +11,7 @@ services:
 
   gateway:
     image: nginx:alpine
+    restart: unless-stopped
     volumes:
       # - ./nginx/default.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
@@ -22,6 +23,7 @@ services:
 
   frontend:
     image: projectyear3/frontendyear3:latest
+    restart: unless-stopped
     networks:
       - projectyear3-network
     expose:
@@ -32,6 +34,10 @@ services:
 
   backend:
     image: projectyear3/backendyear3:latest
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    
     # deploy:
     #   replicas: 3
     networks:
