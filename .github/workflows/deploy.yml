@@ -19,6 +19,9 @@ jobs:
         run: |
           echo "TUNNEL_TOKEN=${{ secrets.TUNNEL_TOKEN }}" > .env
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+          echo "COOKIE_SECURE=${{ secrets.COOKIE_SECURE }}" >> .env
+          echo "COOKIE_SAMESITE=${{ secrets.COOKIE_SAMESITE }}" >> .env
+          echo "SESSION_MAX_AGE_DAYS=${{ secrets.SESSION_MAX_AGE_DAYS }}" >> .env
 
       - name: Restart containers
         run: docker compose up -d --remove-orphans 

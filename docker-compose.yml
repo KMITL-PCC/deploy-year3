@@ -20,6 +20,10 @@ services:
       - frontend
     networks:
       - projectyear3-network
+    depends_on:
+      - cloudflared
+      - frontend
+      - backend
 
   frontend:
     image: projectyear3/frontendyear3:latest
@@ -28,20 +32,37 @@ services:
       - projectyear3-network
     expose:
       - "3000"
-  #   build: ./frontend
-  #   environment:
-  #     - NEXT_PUBLIC_API_URL=http://localhost/api
 
   backend:
     image: projectyear3/backendyear3:latest
     restart: unless-stopped
     environment:
       - DATABASE_URL=${DATABASE_URL}
-    
-    # deploy:
-    #   replicas: 3
+      - SESSION_SECRET=${SESSION_SECRET}
+      - REDIS_URL=redis://redis:6379
+      - COOKIE_SECURE=${COOKIE_SECURE}
+      - COOKIE_SAMESITE=${COOKIE_SAMESITE}
+      - SESSION_MAX_AGE_DAYS=${SESSION_MAX_AGE_DAYS}
+    depends_on:
+      - redis
+    expose:
+      - "3000"
     networks:
       - projectyear3-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: app-redis
+    restart: unless-stopped
+    expose:
+      - "6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - projectyear3-network
+
+volumes:
+  redis_data:
 
 networks:
   projectyear3-network:
