@@ -25,6 +25,8 @@ services:
   frontend:
     image: projectyear3/frontendyear3:latest
     restart: unless-stopped
+    environment:
+      - NEXT_PUBLIC_API_URL=""
     networks:
       - projectyear3-network
     expose:
